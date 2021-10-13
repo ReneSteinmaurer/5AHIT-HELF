@@ -1,0 +1,1 @@
+/usr/bin/cc -g   CMakeFiles/01_test.dir/main.c.o CMakeFiles/01_test.dir/lcd_i2c.c.o  -o 01_test  -lwiringPi 

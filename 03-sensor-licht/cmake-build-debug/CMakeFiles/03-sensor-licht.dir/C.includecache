@@ -1,0 +1,18 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/tmp/tmp.qNNd5L0iyQ/main.c
+stdio.h
+-
+wiringPi.h
+-
+wiringPiI2C.h
+-
+stdio.h
+-
+

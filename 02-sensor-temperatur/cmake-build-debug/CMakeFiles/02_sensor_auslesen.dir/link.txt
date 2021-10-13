@@ -1,0 +1,1 @@
+/usr/bin/cc -g  -rdynamic CMakeFiles/02_sensor_auslesen.dir/main.c.o  -o 02_sensor_auslesen 

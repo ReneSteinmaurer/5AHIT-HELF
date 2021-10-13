@@ -1,0 +1,3 @@
+/tmp/02-sensor-auslesen/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/tmp/02-sensor-auslesen/cmake-build-debug/CMakeFiles/02-sensor-auslesen.dir
+/tmp/02-sensor-auslesen/cmake-build-debug/CMakeFiles/edit_cache.dir

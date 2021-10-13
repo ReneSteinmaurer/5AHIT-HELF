@@ -1,0 +1,30 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/tmp/01-test/lcd_i2c.h
+stdint.h
+-
+
+/tmp/01-test/main.c
+stdio.h
+-
+lcd_i2c.h
+/tmp/01-test/lcd_i2c.h
+wiringPi.h
+-
+wiringPiI2C.h
+-
+stdarg.h
+-
+stdio.h
+-
+stdlib.h
+-
+lcd_i2c.h
+/tmp/01-test/lcd_i2c.h
+

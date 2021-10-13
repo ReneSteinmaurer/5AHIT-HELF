@@ -1,0 +1,1 @@
+/usr/bin/cc -g  -rdynamic CMakeFiles/02-sensor-auslesen.dir/main.c.o CMakeFiles/02-sensor-auslesen.dir/lcd_i2c.c.o  -o 02-sensor-auslesen  -lwiringPi 
