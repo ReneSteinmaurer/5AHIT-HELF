@@ -98,5 +98,5 @@ set(CMAKE_MAKEFILE_PRODUCTS
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
-  "CMakeFiles/03-sensor-licht.dir/DependInfo.cmake"
+  "CMakeFiles/04_sd_card.dir/DependInfo.cmake"
   )

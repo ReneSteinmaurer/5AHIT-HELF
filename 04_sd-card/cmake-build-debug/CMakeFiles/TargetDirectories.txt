@@ -1,0 +1,3 @@
+/tmp/04_sd-card/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/tmp/04_sd-card/cmake-build-debug/CMakeFiles/04_sd_card.dir
+/tmp/04_sd-card/cmake-build-debug/CMakeFiles/edit_cache.dir

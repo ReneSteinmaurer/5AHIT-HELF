@@ -12,10 +12,9 @@
       <paths name="raspi04 (2179a210-7bdb-43fe-884f-24874b161059)">
         <serverdata>
           <mappings>
-            <mapping deploy="/tmp/tmp.qNNd5L0iyQ" local="$PROJECT_DIR$" />
+            <mapping deploy="/tmp/04_sd-card" local="$PROJECT_DIR$" />
           </mappings>
           <excludedPaths>
-            <excludedPath local="true" path="$PROJECT_DIR$/cmake-build-debug" />
             <excludedPath local="true" path="$PROJECT_DIR$/cmake-build-debug" />
           </excludedPaths>
         </serverdata>
