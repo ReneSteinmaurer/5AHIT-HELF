@@ -1,0 +1,1 @@
+/usr/bin/cc -g   CMakeFiles/04_sdcard.dir/main.c.o  -o 04_sdcard  -lwiringPi 

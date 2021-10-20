@@ -12,47 +12,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6d7a9b70-5b42-41fc-a05d-6748f12422ee" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../04_sdcard/.idea/other.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../04_sd-card/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../04_sd-card/.idea/.name" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../04_sd-card/.idea/04_sd-card.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../04_sd-card/.idea/deployment.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../04_sd-card/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../04_sd-card/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../04_sd-card/.idea/other.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../04_sd-card/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../04_sd-card/CMakeLists.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../04_sd-card/Makefile" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../04_sd-card/cmake-build-debug/04_sd_card.cbp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../04_sd-card/cmake-build-debug/CMakeCache.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../04_sd-card/cmake-build-debug/CMakeFiles/04_sd_card.dir/DependInfo.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../04_sd-card/cmake-build-debug/CMakeFiles/04_sd_card.dir/build.make" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../04_sd-card/cmake-build-debug/CMakeFiles/04_sd_card.dir/cmake_clean.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../04_sd-card/cmake-build-debug/CMakeFiles/04_sd_card.dir/depend.make" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../04_sd-card/cmake-build-debug/CMakeFiles/04_sd_card.dir/flags.make" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../04_sd-card/cmake-build-debug/CMakeFiles/04_sd_card.dir/link.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../04_sd-card/cmake-build-debug/CMakeFiles/04_sd_card.dir/progress.make" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../04_sd-card/cmake-build-debug/CMakeFiles/3.16.3/CMakeCCompiler.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../04_sd-card/cmake-build-debug/CMakeFiles/3.16.3/CMakeDetermineCompilerABI_C.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../04_sd-card/cmake-build-debug/CMakeFiles/3.16.3/CMakeSystem.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../04_sd-card/cmake-build-debug/CMakeFiles/3.16.3/CompilerIdC/CMakeCCompilerId.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../04_sd-card/cmake-build-debug/CMakeFiles/3.16.3/CompilerIdC/a.out" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../04_sd-card/cmake-build-debug/CMakeFiles/CMakeDirectoryInformation.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../04_sd-card/cmake-build-debug/CMakeFiles/CMakeOutput.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../04_sd-card/cmake-build-debug/CMakeFiles/Makefile.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../04_sd-card/cmake-build-debug/CMakeFiles/Makefile2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../04_sd-card/cmake-build-debug/CMakeFiles/TargetDirectories.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../04_sd-card/cmake-build-debug/CMakeFiles/clion-environment.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../04_sd-card/cmake-build-debug/CMakeFiles/clion-log.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../04_sd-card/cmake-build-debug/CMakeFiles/cmake.check_cache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../04_sd-card/cmake-build-debug/CMakeFiles/progress.marks" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../04_sd-card/cmake-build-debug/Makefile" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../04_sd-card/cmake-build-debug/cmake_install.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../04_sd-card/lcd_i2c.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../04_sd-card/lcd_i2c.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../04_sd-card/lcdi2c.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../04_sd-card/main.c" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -104,7 +64,7 @@
       <updated>1632984818556</updated>
       <workItem from="1632984820342" duration="8248000" />
       <workItem from="1634192734018" duration="966000" />
-      <workItem from="1634199165233" duration="1419000" />
+      <workItem from="1634199165233" duration="1424000" />
     </task>
     <servers />
   </component>
