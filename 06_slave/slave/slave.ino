@@ -1,7 +1,7 @@
-#include <SoftwareSerial.h>
+#include<Wire.h>
 
-#define PIN_RX     7
-#define PIN_TX     8
+#define LEDS_I2C_ADDR 4           // I2C address of LED, LDR, and tactile switch slave
+
 #define PIN_LED    4
 #define PIN_SWITCH 2
 #define PIN_LDR    A1
@@ -12,50 +12,33 @@
 #define READ_LDR    0x04
 #define NO_ACTION   0xFF
 
-#define MOT_A 10
-#define MOT_B 11
-#define FWD  12
-#define BWD  13
-#define JOY_DC 0x05
-#define COMM_WRITE_READ_DELAY 2
-
 volatile byte received;
-
-SoftwareSerial softSerial(PIN_RX, PIN_TX);
+volatile boolean jobAvailable;
+volatile byte unsentData[2];
+volatile int unsentCount;           // initialized to 0 to indicate no data belonging to previous command is unsent
 
 void setup()
 {
   Serial.begin(115200);
+  pinMode(PIN_LED, OUTPUT);               // setting LED pin as OUTPUT
 
-  pinMode(PIN_LED, OUTPUT);
-  pinMode(MOT_A, OUTPUT);
-  pinMode(MOT_B, OUTPUT);
-  pinMode(FWD, OUTPUT);
-  pinMode(BWD, OUTPUT);
-
-  digitalWrite(BWD, HIGH);// setting LED pin as OUTPUT
-
-  setupSerialComm();
+  setupI2cComm();
 
   printInfo();                            // print usage message onto device connected to HW Serial
 }
 
 void loop() {
-  if (softSerial.available() > 0) // fetch received command
-  {
-    received = softSerial.read(); // receive byte as a character
+  if (jobAvailable) {                     // react to command received from master
+    noInterrupts();
+    jobAvailable = false;                 // indicate no message to process
+    interrupts();
 
-    doCommand();
-    // process command received from master
-
-    //startDCMotor();
+    doCommand();                          // process command received from master
   }
 }
 
 void doCommand() {
   static boolean prevLedState = false;
-  static int prevValue;
-  static int prevPower;
   int ldrValue;
   switch (received) {                           // distinquish command received
     case LED_ON:
@@ -74,7 +57,7 @@ void doCommand() {
       break;
     case READ_SWITCH:
       //Serial.println(F("Slave: read switch"));
-      writeSerialByte(digitalRead(PIN_SWITCH) ? LED_ON : LED_OFF); // send the button state to master
+      writeI2cByte(digitalRead(PIN_SWITCH) ? LED_ON : LED_OFF);
       break;
     case READ_LDR:
       //Serial.println(F("Slave: read LDR"));
@@ -84,13 +67,9 @@ void doCommand() {
       Serial.print(' '); Serial.print(ldrValue & 0xFF);
       Serial.print(") ");
       Serial.println(ldrValue);
-      writeSerialInt(ldrValue);
+      writeI2cInt(ldrValue);
       break;
     case NO_ACTION:                           // with SPI: will be sent from master following READ_SWITCH to get button state
-      break;
-    case JOY_DC:
-      Serial.println("JOY DC");
-      startDCMotor(&prevPower, &prevValue);
       break;
     default:
       Serial.print(F("Slave: undefined command 0x"));
@@ -99,60 +78,54 @@ void doCommand() {
 }
 
 void printInfo() {
-  Serial.println(F("UART communication between two Arduino UNO (Master and slave)"));
+  Serial.println(F("I2C communication between two Arduino UNO (Master and slave)"));
   Serial.println(F("Master: tactile switch on pin 2, LED on pin 3"));
   Serial.println(F("Slave: tactile swich on pin 2, LED on pin 4, LDR on pin A1"));
-  Serial.println(F("Connection: 8 -> 7, 9600 BAUD"));
+  Serial.println(F("Connection: SDA<->SDA, SCL<->SCL (SDA/A4, SCL/A5 on UNO)"));
   Serial.println(F("Slave switches LED on/off according to command received (LED_ON, LED_OFF)"));
   Serial.println(F("       reads own switch if requested and prepares result for next transfer (READ_SWITCH)"));
   Serial.println(F("       reads LDR if requested, prepares 2 result bytes (MSB first) for next transfers (READ_LDR)"));
   Serial.println(F("       prints LDR value sent to master (2 bytes, MSB folowed by LSB) onto Serial"));
 }
 
-void setupSerialComm() {
-  softSerial.begin(9600);
+void setupI2cComm() {
+  jobAvailable = false;                   // nothing received yet -> nothing to do
+  Wire.begin(LEDS_I2C_ADDR);              // join i2c bus with address #4
+  Wire.onReceive(receiveEvent);           // register event handler for receiving data
+  Wire.onRequest(requestEvent);           // register event handler for answering requests
 }
 
-void writeSerialByte(byte value) {
-  softSerial.write(value);
+void writeI2cByte(byte value) {
+  noInterrupts();
+  unsentData[0] = value; // send the button state on next transfer to master
+  unsentCount = 1;                                            // remember count of unsent bytes
+  interrupts();
 }
 
-void writeSerialInt(int value) {
-  softSerial.write((value >> 8) & 0xFF); // send the high byte of the LDR value to master first
-  softSerial.write(value & 0xFF);        // send low byte of LDR value to master second (MSB first!)
+void writeI2cInt(int value) {
+  noInterrupts();
+  unsentData[0] = value & 0xFF;        // preserve low byte of LDR value in unsent data at index 0 (MSB first!)
+  unsentData[1] = (value >> 8) & 0xFF; // send the high byte of the LDR value on next transfer to master
+  unsentCount = 2;                        // remember count of unsent bytes
+  interrupts();
 }
 
-boolean requestSerialInt(byte command, int *value) {
-  boolean success = false;
-  byte received[2];
-  softSerial.write(command); // send read switch request READ_LDR to slave
-  delay(COMM_WRITE_READ_DELAY); // give slave time to accomplish work (1 is not enough)
-  success = softSerial.available() >= 2;
-  if (success) { // slave may send less than requested
-    received[0] = softSerial.read(); // receive MSB byte of LDR value from slave
-    received[1] = softSerial.read(); // receive LSB byte of LDR value from slave
-    *value = received[0] * 256 + received[1]; // build int from 2 bytes
-    Serial.print(F("Master: LDR: "));
-    Serial.print('('); Serial.print(received[0]);
-    Serial.print(' '); Serial.print(received[1]);
-    Serial.print(") ");
+// function that executes whenever data is received from master
+// this function is registered as an event, see setup()
+void receiveEvent(int howMany)
+{
+  if (Wire.available() > 0) // fetch received command
+  {
+    received = Wire.read(); // receive byte as a character
+    jobAvailable = true;                  // trigger loop as new command to be processed is available
   }
-  return success;
 }
 
-
-void startDCMotor(int *prevPower, int* prevValue) {
-  int value = 0;
-  requestSerialInt(JOY_DC, &value);
-
-  Serial.println("Wert:"+value);
-  delay(COMM_WRITE_READ_DELAY);
-  if (value != *prevValue) {
-    int pwr = map(0, 1023, 0, 255, value);
-    analogWrite(MOT_A, pwr);
-    *prevPower = pwr;
-  } else {
-    analogWrite(MOT_A, *prevPower);
+// function that executes whenever data is requested by master
+// this function is registered as an event, see setup()
+void requestEvent()
+{
+  while (unsentCount > 0) {
+    Wire.write(unsentData[--unsentCount]);
   }
-
 }
